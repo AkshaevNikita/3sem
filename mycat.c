@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
  
-void Cat(const int fd) {
+void copy(const int fd) {
     char str[4096];
     int n = read(fd, str, 4096), p = 0;
     if (n < 0) {
@@ -26,12 +26,12 @@ void Cat(const int fd) {
 int main(int argc, char *argv[]){
     if (argc == 1) {
         while (1) 
-            Cat(0);
+            copy(0);
     }
 
     for (int i = 1; i < argc; i++) {
         int fd = open(argv[i], O_RDWR | O_EXCL);    
-        Cat(fd);
+        copy(fd);
     }
 
     return 0;
